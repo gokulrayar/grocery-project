@@ -1,0 +1,266 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="GroceryApp.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <link href="Content/style.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.4.1.js"></script>
+    <script src="Scripts/xhr.js"></script>
+    <script src="Scripts/util.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body class="set-bg">
+    <form class="needs-validation" runat="server">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+            <div class="container-fluid mx-5">
+                <a class="navbar-brand text-white" href="Welcome"><b>Grocery App</b></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li id="cart-menu" class="nav-item">
+                            <i class="fa fa-shopping-cart"></i>
+                            <a class="nav-link text-white" href="Cart">Cart</a>
+                        </li>
+                        <li id="order-menu" class="nav-item">
+                            <a class="nav-link text-white" href="Order">Orders</a>
+                        </li>
+                        <li id="order-menu" class="nav-item">
+                            <a class="nav-link text-white" href="ProductDetails">Add Product</a>
+                        </li>
+                        <li class="nav-item dropdown me-2" onclick="window.location.href = 'Profile'">
+                            <img id="profile-img" src="./Assets/male.png"  />
+                            <a class="nav-link dropdown-toggle text-white" id="user-dropdown" href="Profile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="user-dropdown">
+                                <li><a class="dropdown-item" href="Orders">My Orders</a></li>
+                                <li><a class="dropdown-item" href="Cart">My Cart</a></li>
+                                <li><a class="dropdown-item" href="Profile">Profile</a></li>
+                                <div onclick="logOut()">
+                                    <li><a id="log-out" class="dropdown-item">Log Out</a></li>
+                                </div>
+                            </ul>
+                        </li>
+                        <li id="logout-menu" class="nav-item">
+                            <a class="nav-link text-white" href="Cart">Log Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="toast text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    Something went wrong. Please try again.
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+    </form>
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/Scripts/bootstrap.js") %>
+    </asp:PlaceHolder>
+</body>
+</html>
+
+<style>
+nav.navbar {
+    height: 60px;
+}
+
+.navbar-brand {
+    margin-top: -5px;
+}
+
+.nav-item.dropdown,
+#cart-menu {
+    position: absolute;
+    top: 8px;
+}
+
+#cart-menu {
+    right: 52px;
+}
+
+.nav-item.dropdown {
+    right: 130px;
+}
+
+#cart-menu a {
+    display: inline-block;
+    margin-left: -5px;
+}
+
+#cart-menu i {
+    color: #ffffff;
+    font-size: 18px;
+}
+
+ul.navbar-nav {
+    margin-right: 0px;
+}
+
+#profile-img {
+    border-radius: 50%;
+    height: 35px;
+    width: 35px;
+}
+
+#user-dropdown {
+    display: inline-block;
+}
+
+#log-out:hover {
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    font-weight: bold;
+}
+</style>
+
+<script>
+
+    let cart = [];
+    let cartId;
+    let productId;
+    let cartMode;
+    let user;
+
+    window.onload = function onLoad() {
+        checkPageRequestValidity();
+        const userId = localStorage.getItem("grocery_app_user_id");
+        const endpoint = `users/${userId}`;
+        const onOk = function (response) {
+            user = response.data;
+            $("#user-dropdown")[0].innerText = `${user.firstName} ${user.lastName}`;
+            let routes = window.location.href.split("/");
+            if (routes[routes.length - 1].toUpperCase() == "PROFILE") {
+                $("#firstname")[0].value = user.firstName;
+                $("#lastname")[0].value = user.lastName;
+                $("#address")[0].value = user.address;
+                $("#email")[0].value = user.email;
+                $("#password")[0].value = user.password;
+                $("#role")[0].value = user.role;
+                $("#gender")[0].value = user.gender;
+            }
+        };
+        const onError = function (response) { };
+        send(HttpMethod.GET, endpoint, null, onOk, onError);
+        fetchCart(renderProducts);
+    }
+
+    function modifyCart(eventDetails, mode) {
+        productId = getProductId(eventDetails, mode);
+        cartMode = mode;
+        fetchCart(modifyCartForUser);
+    }
+
+    function getProductId(eventDetails) {
+        let className;
+        let id;
+        let classes = eventDetails.srcElement.classList;
+        for (var i = 0; i < classes.length; i++) {
+            if (classes[i].startsWith("cart-btn")) {
+                className = classes[i];
+                id = parseInt(classes[i].replace('cart-btn-', ''));
+            }
+        }
+        $(`.btn-outline-primary.${className}`)[0].style.display = (cartMode == 1) ? "none" : "inline-block";
+        $(`.btn-outline-danger.${className}`)[0].style.display = (cartMode == 2) ? "none" : "inline-block";
+        return id;
+    }
+
+    function fetchCart(callback) {
+        let userId = localStorage.getItem("grocery_app_user_id");
+        const endpoint = `users/${userId}/carts`;
+        const onOk = function (response) {
+            if (response.data) {
+                cartId = response.data.cartId;
+                cart = response.data.productIds;
+            }
+            else {
+                cartId = null;
+                cart = [];
+            }
+            if (cartMode == 1) {
+                cart.push(productId);
+            }
+            else {
+                cart = cart.filter(c => c != productId);
+            }
+            callback();
+        };
+        const onError = function () {
+            cartId = null;
+            cart = [];
+        };
+        send(HttpMethod.GET, endpoint, null, onOk, onError);
+    }
+
+    function modifyCartForUser() {
+        let userId = localStorage.getItem("grocery_app_user_id");
+        var endpoint = `users/${userId}/carts`;
+        endpoint += cartId ? `/${cartId}` : '';
+        const data = {
+            productId: productId,
+            operationType: cartMode
+        };
+        const onOk = function (response) {
+            console.log("Cart modified successfully");
+        };
+        const onError = function () { };
+        send(cartId ? HttpMethod.PUT : HttpMethod.POST, endpoint, data, onOk, onError);
+    }
+
+    function markProducts(products) {
+        for (var i = 0; i < products.length; i++) {
+            $(`.btn-outline-primary.cart-btn-${products[i].id}`)[0].style.display = (cart && cart.length > 0 && cart.find(products[i].id)) ? "none" : "inline-block";
+            $(`.btn-outline-danger.cart-btn-${products[i].id}`)[0].style.display = (cart && cart.length > 0 && cart.find(products[i].id)) ? "inline-block" : "none";
+        }
+    }
+
+    function logOut() {
+        localStorage.removeItem("grocery_app_user_id");
+        localStorage.removeItem("grocery_app_access_token");
+        window.location.href = "Login";
+    }
+</script>

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "testuser@app.com",
+    "password": "7NcYcNGWMxapfjrDQIyYNa2M8PPBvHA1J8MCZVNPda4=",
+    "role": 2
+  },
+  {
+    "id": 2,
+    "firstName": "Test",
+    "lastName": "User 2",
+    "email": "testuser2@app.com",
+    "password": "7NcYcNGWMxapfjrDQIyYNa2M8PPBvHA1J8MCZVNPda4=",
+    "role": 2
+  }
+]

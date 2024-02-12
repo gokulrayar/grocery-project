@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "paymentId": 1,
+    "orderedAt": "2024-01-15"
+  },
+  {
+    "id": 2,
+    "userId": 1,
+    "paymentId": 2,
+    "orderedAt": "2024-01-20"
+  }
+]
